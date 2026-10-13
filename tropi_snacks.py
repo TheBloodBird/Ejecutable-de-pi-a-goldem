@@ -34,7 +34,7 @@ def clean_data(raw):
     header_idx = None
     for i in range(min(8, len(df))):
         row = df.iloc[i].astype(str).str.strip()
-        joined = " ".join(row.tolist()).lower()
+        joined = " ".join(row.fillna("").astype(str).tolist()).lower()
         if "tiempo" in joined and "humedad" in joined and ("masa" in joined or "perdida" in joined or "pérdida" in joined):
             header_idx = i
             break
