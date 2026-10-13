@@ -1,0 +1,33 @@
+TROPI SNACKS S.A.C. — aplicación de escritorio Windows
+
+Este paquete contiene una aplicación de escritorio que replica las funciones centrales del notebook:
+- Carga de CSV para freidora de aire y horno industrial
+- Estimaciones con Lagrange, spline cúbico y ANN
+- Métricas R², MAE y RMSE
+- Gráficos 3D
+- Exportación de resultados a Excel
+
+IMPORTANTE
+Este ZIP contiene el código fuente y la configuración para generar el EXE. No incluye todavía un EXE ya compilado, porque la compilación nativa debe ejecutarse en Windows. Si no quieres instalar Python en tu PC, puedes usar GitHub Actions siguiendo los pasos de abajo desde el navegador.
+
+MÉTODO RECOMENDADO: GENERAR EL EXE ONLINE SIN INSTALAR PYTHON EN TU PC
+1. Inicia sesión o crea una cuenta gratuita en https://github.com/
+2. Crea un repositorio nuevo (por ejemplo: tropi-snacks-app).
+3. Sube el contenido completo de esta carpeta al repositorio, incluyendo la carpeta oculta .github/workflows/build-windows.yml.
+4. En el repositorio, abre la pestaña Actions.
+5. Selecciona "Compilar EXE de Windows" y pulsa "Run workflow".
+6. Espera a que el proceso termine con una marca verde.
+7. En el resumen de esa ejecución, descarga el artefacto "Tropi_Snacks-Windows-EXE".
+8. Descomprime el artefacto; allí estará Tropi_Snacks.exe. Podrás ejecutarlo sin instalar Python en la computadora donde lo uses.
+
+MÉTODO ALTERNATIVO: COMPILAR EN UNA PC CON PYTHON
+1. Instala Python 3.11.
+2. Abre esta carpeta y haz doble clic en COMPILAR_EN_WINDOWS.bat.
+3. El ejecutable aparecerá en dist\Tropi_Snacks.exe.
+
+FORMATO CSV
+Los archivos deben contener una fila de encabezados que identifique las columnas Tiempo, Humedad y Perdida_masa. El programa busca esos encabezados incluso si están en las primeras filas del archivo. Puede leer CSV separados por coma o punto y coma.
+Se requieren al menos 3 tiempos distintos. Las estimaciones fuera del rango experimental son extrapolaciones y deben interpretarse con cuidado.
+
+NOTA CIENTÍFICA
+Las métricas calculadas sobre los mismos datos usados para ajustar los modelos no constituyen validación independiente. En particular, Lagrange y spline interpolan los datos de entrenamiento; los valores de R² no deben interpretarse automáticamente como capacidad predictiva en datos nuevos.

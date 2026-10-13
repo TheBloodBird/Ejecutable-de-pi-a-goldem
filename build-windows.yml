@@ -1,0 +1,28 @@
+name: Compilar EXE de Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Compilar EXE
+        run: |
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name Tropi_Snacks tropi_snacks.py
+      - name: Publicar ejecutable
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tropi_Snacks-Windows-EXE
+          path: dist/Tropi_Snacks.exe
+          if-no-files-found: error
